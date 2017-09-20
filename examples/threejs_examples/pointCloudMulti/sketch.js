@@ -28,7 +28,7 @@ window.addEventListener('load', function() {
 
   // Define and create an instance of kinectron
   var kinectronIpAddress = ""; // FILL IN YOUR KINECTRON IP ADDRESS HERE
-  kinectron = new Kinectron("172.22.151.79");
+  kinectron = new Kinectron();
 
   // Connect remote to application
   kinectron.makeConnection();
