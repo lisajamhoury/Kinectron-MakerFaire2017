@@ -27,22 +27,16 @@ window.addEventListener('load', function() {
   initPointCloud();
 
   // Define and create an instance of kinectron
-  var kinectronIpAddress = ""; // FILL IN YOUR KINECTRON IP ADDRESS HERE
   kinectron = new Kinectron("172.22.151.79");
 
   // Connect remote to application
   kinectron.makeConnection();
-  //kinectron.startRawDepth(rdCallback);
-  //kinectron.setRawDepthCallback(rdCallback);
-  //kinectron.setBodiesCallback(bodiesCallback);
   kinectron.startRawDepth(rdCallback);
 
 });
 
 // Run this callback each time Kinect data is received
 function rdCallback(dataReceived) {
-  //depthBuffer = dataReceived.rawDepth;
-
   // Update point cloud based on incoming Kinect data
   pointCloud(dataReceived);
 }
@@ -86,17 +80,20 @@ function createParticles() {
     var vertex = new THREE.Vector3(x, y, Math.random());
     particles.vertices.push(vertex);
 
-    // Assign each particle a color
+    //////// Change particle color here //////////////
     colors[i] = new THREE.Color(0xff0000);
 
+    //////// Make particle color random //////////////
     // colors[i].setHex( Math.random() * 0xffffff );
 
   }
 
   // Add point cloud to scene
-  //////// Change size of particles with size here ////////
   particles.colors = colors;
+  
+  //////// Change size of particles with size here ////////
   var material = new THREE.PointsMaterial( { size: 1, vertexColors: THREE.VertexColors, transparent: true } );
+  
   mesh = new THREE.Points(particles, material);
   scene.add(mesh);
 }

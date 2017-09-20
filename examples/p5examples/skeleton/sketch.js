@@ -14,7 +14,7 @@ var lerpAmt = 0.3;
 var state = 'ascending';
 
 function setup() {
-  myCanvas = createCanvas(500, 500);
+  myCanvas = createCanvas(950, 540);
   background(0);
   noStroke();
 
@@ -67,44 +67,14 @@ function drawJoint(joint) {
   fill(100);
 
   // Kinect location data needs to be normalized to canvas size
-  ellipse(joint.depthX * myCanvas.width, joint.depthY * myCanvas.height, 15, 15);
+  ellipse(joint.colorX * myCanvas.width, joint.colorY * myCanvas.height, 15, 15);
 
   fill(200);
 
   // Kinect location data needs to be normalized to canvas size
-  ellipse(joint.depthX * myCanvas.width, joint.depthY * myCanvas.height, 3, 3);
+  ellipse(joint.colorX * myCanvas.width, joint.colorY * myCanvas.height, 3, 3);
 }
 
-// Draw hands
-function drawHands(leftHand, rightHand) {
-
-  //check if hands are touching 
-  if ((Math.abs(leftHand.depthX - rightHand.depthX) < 0.01) && (Math.abs(leftHand.depthY - rightHand.depthY) < 0.01)) {
-    hands.leftHandState = 'clapping';
-    hands.rightHandState = 'clapping';
-  }
-
-  // draw hand states
-  updateHandState(hands.leftHandState, hands.leftHand);
-  updateHandState(hands.rightHandState, hands.rightHand);
-}
-
-// Find out state of hands
-function updateHandState(handState, hand) {
-  switch (handState) {
-    case 1:
-      drawHand(hand, 1, 255);
-      break;
-
-    case 0:
-      drawHand(hand, 0, 255);
-      break;
-
-      // Created new state for clapping
-    case 1:
-      drawHand(hand, 1, 'red');
-  }
-}
 
 // Draw the hands based on their state
 function drawHand(hand, handState, color) {
@@ -130,5 +100,5 @@ function drawHand(hand, handState, color) {
   fill(color);
 
   // Kinect location needs to be normalized to canvas size
-  ellipse(hand.depthX * myCanvas.width, hand.depthY * myCanvas.height, diameter, diameter);
+  ellipse(hand.colorX * myCanvas.width, hand.colorY * myCanvas.height, diameter, diameter);
 }
