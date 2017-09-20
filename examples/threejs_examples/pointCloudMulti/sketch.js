@@ -35,7 +35,7 @@ window.addEventListener('load', function() {
   //kinectron.startRawDepth(rdCallback);
   //kinectron.setRawDepthCallback(rdCallback);
   //kinectron.setBodiesCallback(bodiesCallback);
-  kinectron.startRawDepth(rdCallback);
+  kinectron.startMultiFrame(["body", "raw-depth"], rdCallback);
 
 });
 
@@ -44,7 +44,7 @@ function rdCallback(dataReceived) {
   //depthBuffer = dataReceived.rawDepth;
 
   // Update point cloud based on incoming Kinect data
-  pointCloud(dataReceived);
+  if (dataReceived.rawDepth) pointCloud(dataReceived.rawDepth);
 }
 
 function bodiesCallback(dataReceived) {
